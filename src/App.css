@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+body {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.ant-layout-content.bg-green {
+  background: #ffeddb;
+  min-height: calc(100vh - 134px);
+}
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+.todo-list-row {
+  border: 1px solid #b33030;
+  position: relative;
+}
+.todo-list-row .add-icon {
+  background: #b33030;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@media screen and (max-width: 767px) {
+  .todo-list-row .add-icon {
+    top: -30px;
+    right: -30px;
+  }
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media screen and (min-width: 768px) {
+  .todo-list-row .add-icon {
+    bottom: -30px;
+    right: -30px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.darggable-list-item {
+  border-bottom: 1px solid #ffeddb;
+}
+.darggable-list-item:last-child {
+  border: none;
+}
+.column {
+  padding-bottom: 25px;
+  padding-top: 25px;
+}
+.column-todo {
+}
+
+.column-todo .droppable-area {
+  background: #edcdbb;
+}
+.droppable-area {
+  border-radius: 10px;
+  min-height: 25px;
+}
+
+.column-in-progress .droppable-area {
+  background-color: #e3b7a0;
+}
+.column-done .droppable-area {
+  background: #bf9270;
+}
+
+.action-icon {
+  padding: 0.5rem;
+}
+.action-icon:hover {
+  cursor: pointer;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.15) !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ant-modal-content,
+.ant-modal-header,
+.ant-modal-footer {
+  background-color: #ffeddb !important;
+}
+.ant-modal-footer {
+  border-top: 1px solid #edcdbb !important;
+}
+.ant-modal-header {
+  border-bottom: 1px solid #edcdbb !important;
 }
