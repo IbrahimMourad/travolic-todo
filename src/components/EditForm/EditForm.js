@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal, Typography } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { editTodo } from '../../store/todoSlice';
 const EditForm = ({ isModalVisible, handleCancel }) => {
@@ -18,7 +18,11 @@ const EditForm = ({ isModalVisible, handleCancel }) => {
 
   return (
     <Modal
-      title="Edit Todo"
+      title={
+        <Typography.Title style={{ marginBottom: 0 }} level={3}>
+          Edit Todo
+        </Typography.Title>
+      }
       centered
       visible={isModalVisible}
       onOk={handleCancel}

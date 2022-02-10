@@ -55,7 +55,7 @@ const TodoList = ({ showAddModal }) => {
             key={key}
             className={`column column-${key.toLowerCase()}`}
           >
-            <Title level={3}>{key}</Title>
+            <Title level={2}>{key}</Title>
             <Droppable droppableId={key}>
               {(provided) => (
                 <div
@@ -71,7 +71,6 @@ const TodoList = ({ showAddModal }) => {
                         draggableId={todo.id.toString()}
                       >
                         {(provided, snapshot) => {
-                          console.log(snapshot);
                           return (
                             <div
                               className={`darggable-list-item ${

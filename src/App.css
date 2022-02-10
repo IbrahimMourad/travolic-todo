@@ -1,21 +1,36 @@
 body {
   font-weight: 500;
   font-size: 1.5rem;
+  font-family: 'Poppins', sans-serif !important;
 }
 /* Layout */
 .ant-layout-content.bg-dark-grey {
   background-color: #151515;
-  min-height: calc(100vh - 134px);
+  min-height: calc(100vh - 116px);
   border-top: 1px solid #cccc99;
   border-bottom: 1px solid #cccc99;
 }
-.ant-layout-content.bg-dark-grey h3 {
+.ant-layout-content.bg-dark-grey h2 {
   color: #fff;
+  font-family: 'Indie Flower', cursive;
 }
 .ant-layout-header,
 .ant-layout-footer {
+  padding: 15px 50px !important;
+  height: unset !important;
+}
+
+.ant-layout-header,
+.ant-layout-footer {
   background: #030303 !important;
+  font-family: 'Indie Flower', cursive;
   color: #fff !important;
+  letter-spacing: 1.5px;
+}
+.ant-layout-header .ant-typography,
+.ant-layout-footer .ant-typography {
+  color: #fff !important;
+  margin-bottom: 0;
 }
 .container {
   max-width: 100%;
@@ -92,6 +107,10 @@ body {
 .ant-modal-mask {
   background-color: rgba(0, 0, 0, 0.15) !important;
 }
+.ant-modal-header .ant-modal-title {
+  font-family: 'Indie Flower', cursive;
+  letter-spacing: 1.5px;
+}
 
 .ant-modal-content,
 .ant-modal-header,
@@ -108,6 +127,9 @@ body {
   border-radius: 10px !important;
 }
 
+.ant-modal .ant-btn {
+  border-radius: 10px;
+}
 .ant-modal .ant-btn-primary {
   color: #fff;
   background: #121212;

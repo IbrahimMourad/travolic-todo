@@ -1,6 +1,6 @@
 import React from 'react';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { List, Button } from 'antd';
+import { List } from 'antd';
 const { Item } = List;
 const TodoItem = ({
   todo,
