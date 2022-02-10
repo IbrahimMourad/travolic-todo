@@ -8,7 +8,7 @@ const App = () => {
     <Layout>
       <Header>Header</Header>
       <ContentWrapper />
-      <Footer>Footer</Footer>
+      <Footer>Copyright © 2022 - Ibrahim Mohamed</Footer>
     </Layout>
   );
 };

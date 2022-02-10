@@ -2,71 +2,85 @@ body {
   font-weight: 500;
   font-size: 1.5rem;
 }
-.ant-layout-content.bg-green {
-  background: #ffeddb;
+/* Layout */
+.ant-layout-content.bg-dark-grey {
+  background-color: #151515;
   min-height: calc(100vh - 134px);
+  border-top: 1px solid #cccc99;
+  border-bottom: 1px solid #cccc99;
+}
+.ant-layout-content.bg-dark-grey h3 {
+  color: #fff;
+}
+.ant-layout-header,
+.ant-layout-footer {
+  background: #030303 !important;
+  color: #fff !important;
 }
 .container {
   max-width: 100%;
   margin: 0 auto;
   padding: 0 50px;
 }
+/* Todo List */
 .todo-list-row {
-  border: 1px solid #b33030;
   position: relative;
 }
 .todo-list-row .add-icon {
-  background: #b33030;
+  background: #cccc99;
+  color: #333333;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   width: 60px;
   height: 60px;
+  border-color: #cccc99;
   border-radius: 50%;
+  top: -30px;
+  right: -30px;
 }
-
-@media screen and (max-width: 767px) {
-  .todo-list-row .add-icon {
-    top: -30px;
-    right: -30px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .todo-list-row .add-icon {
-    bottom: -30px;
-    right: -30px;
-  }
+.todo-list-row .add-icon:focus,
+.todo-list-row .add-icon:hover {
+  background: #c5c57b;
+  color: #fff;
+  border-color: #c5c57b;
 }
 
 .darggable-list-item {
-  border-bottom: 1px solid #ffeddb;
+  border-bottom: 1px solid #fff;
+  border-radius: 10px;
 }
+.darggable-list-item:hover,
+.darggable-list-item.is-dragging {
+  background: #c5c57b !important;
+  border-bottom: none;
+}
+
 .darggable-list-item:last-child {
   border: none;
 }
+
+.droppable-area {
+  border-radius: 10px;
+  min-height: 25px;
+  background: #cccc99;
+}
+.droppable-area .ant-list-item {
+  padding: 0.15rem 0.75rem;
+}
+.droppable-area .ant-list-item,
+.droppable-area .ant-list-item-meta-description,
+.droppable-area .ant-list-item-meta-content {
+  color: rgba(0, 0, 0, 0.85);
+}
+
 .column {
   padding-bottom: 25px;
   padding-top: 25px;
 }
-.column-todo {
-}
 
-.column-todo .droppable-area {
-  background: #edcdbb;
-}
-.droppable-area {
-  border-radius: 10px;
-  min-height: 25px;
-}
-
-.column-in-progress .droppable-area {
-  background-color: #e3b7a0;
-}
-.column-done .droppable-area {
-  background: #bf9270;
-}
-
+/* Modal Styles */
 .action-icon {
   padding: 0.5rem;
 }
@@ -82,11 +96,42 @@ body {
 .ant-modal-content,
 .ant-modal-header,
 .ant-modal-footer {
-  background-color: #ffeddb !important;
+  background-color: #cccc99 !important;
 }
 .ant-modal-footer {
-  border-top: 1px solid #edcdbb !important;
+  border-top: 1px solid #fff !important;
 }
 .ant-modal-header {
-  border-bottom: 1px solid #edcdbb !important;
+  border-bottom: 1px solid #fff !important;
+}
+.ant-input {
+  border-radius: 10px !important;
+}
+
+.ant-modal .ant-btn-primary {
+  color: #fff;
+  background: #121212;
+  border-color: #121212;
+}
+.ant-modal .ant-btn:focus,
+.ant-modal .ant-btn:hover {
+  border-color: #b33030 !important;
+  box-shadow: 0 0 0 2px rgba(179, 48, 48, 0.35) !important;
+  background: #b33030;
+  color: #fff;
+}
+
+.ant-modal .ant-btn-primary:hover,
+.ant-modal .ant-btn-primary:focus {
+  border-color: #151515 !important;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 20%) !important;
+  background: rgba(18, 18, 18, 0.9);
+}
+
+/* Input  */
+.ant-input:focus,
+.ant-input:hover,
+.ant-input-focused {
+  border-color: #151515 !important;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 20%) !important;
 }

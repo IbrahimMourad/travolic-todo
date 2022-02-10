@@ -10,10 +10,11 @@ import EditForm from '../EditForm/EditForm';
 import { PlusOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
-const TodoList = () => {
+const TodoList = ({ showAddModal }) => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todo);
   const [isModalVisible, setIsModalVisible] = useState(false);
+
   const handleDeleteTodo = (payload) => {
     dispatch(deleteTodo(payload));
   };
@@ -21,7 +22,7 @@ const TodoList = () => {
     dispatch(selectTodo(payload));
   };
 
-  const showModal = () => setIsModalVisible(true);
+  const showModalEdit = () => setIsModalVisible(true);
   const handleCancel = () => setIsModalVisible(false);
 
   const handleDragEnd = ({ destination, source }) => {
@@ -69,29 +70,34 @@ const TodoList = () => {
                         index={idx}
                         draggableId={todo.id.toString()}
                       >
-                        {(provided) => (
-                          <div
-                            className="darggable-list-item"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <TodoItem
-                              todo={todo}
-                              idx={idx}
-                              handleDeleteTodo={handleDeleteTodo}
-                              handleSelectTodo={handleSelectTodo}
-                              showModal={showModal}
-                              location={key}
-                            />
-                            <EditForm
-                              isModalVisible={isModalVisible}
-                              handleCancel={handleCancel}
-                              // handleEditTodo={handleEditTodo}
-                              location={key}
-                            />
-                          </div>
-                        )}
+                        {(provided, snapshot) => {
+                          console.log(snapshot);
+                          return (
+                            <div
+                              className={`darggable-list-item ${
+                                snapshot.isDragging && 'is-dragging'
+                              }`}
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <TodoItem
+                                todo={todo}
+                                idx={idx}
+                                handleDeleteTodo={handleDeleteTodo}
+                                handleSelectTodo={handleSelectTodo}
+                                showModalEdit={showModalEdit}
+                                location={key}
+                              />
+                              <EditForm
+                                isModalVisible={isModalVisible}
+                                handleCancel={handleCancel}
+                                // handleEditTodo={handleEditTodo}
+                                location={key}
+                              />
+                            </div>
+                          );
+                        }}
                       </Draggable>
                     ))}
                   </List>
@@ -101,7 +107,7 @@ const TodoList = () => {
             </Droppable>
           </Col>
         ))}
-        <Button className="add-icon" onClick={showModal}>
+        <Button className="add-icon" onClick={showAddModal}>
           <PlusOutlined style={{ fontSize: '2rem' }} />
         </Button>
       </Row>

@@ -8,7 +8,6 @@ const AddForm = ({ isModalVisible, handleCancel }) => {
 
   const handleAddTodo = (e) => {
     dispatch(addTodo(todo.current.state.value));
-    // console.log(todo.current.state.value);
     todo.current.state.value = '';
     handleCancel();
   };

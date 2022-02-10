@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Layout, Button } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Layout } from 'antd';
 
 import AddForm from '../AddForm/AddForm';
-import './styles.css';
 import TodoList from '../TodoList/TodoList';
 
 const { Content } = Layout;
@@ -14,9 +12,9 @@ const ContentWrapper = () => {
   const handleCancel = () => setIsModalVisible(false);
   return (
     <>
-      <Content className="bg-green">
+      <Content className="bg-dark-grey">
         <div className="container">
-          <TodoList />
+          <TodoList showAddModal={showModal} />
         </div>
       </Content>
       <AddForm isModalVisible={isModalVisible} handleCancel={handleCancel} />

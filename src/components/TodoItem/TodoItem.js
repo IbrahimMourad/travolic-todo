@@ -6,14 +6,14 @@ const TodoItem = ({
   todo,
   handleDeleteTodo,
   handleSelectTodo,
-  showModal,
+  showModalEdit,
   idx,
   location,
 }) => {
   return (
     <Item>
       <Item.Meta avatar={idx + 1} description={todo.description} />
-      <div>
+      <div className="modal-actions">
         <DeleteOutlined
           className="action-icon"
           style={{ fontSize: '1rem' }}
@@ -26,7 +26,7 @@ const TodoItem = ({
           style={{ fontSize: '1rem' }}
           onClick={() => {
             handleSelectTodo({ location, id: todo.id });
-            showModal();
+            showModalEdit();
           }}
         />
       </div>

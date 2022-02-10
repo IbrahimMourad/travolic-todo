@@ -21,14 +21,6 @@ const Todo = [
     id: v4(),
     description: 'fifth todo',
   },
-  {
-    id: v4(),
-    description: 'sixth todo',
-  },
-  {
-    id: v4(),
-    description: 'seventh todo',
-  },
 ];
 
 const todoSlice = createSlice({
