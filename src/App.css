@@ -167,6 +167,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+
 .footer .list-unstyled,
 .footer p {
   margin-bottom: 0;
@@ -203,4 +204,15 @@ body {
 }
 .footer a:hover span {
   color: #030303;
+}
+@media screen and (max-width: 500px) {
+  .footer {
+    flex-direction: column;
+  }
+  .footer .list-unstyled {
+    padding: 0;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0 0;
+  }
 }
