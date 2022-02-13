@@ -1,44 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { v4 } from 'uuid';
-const Todo = [
-  {
-    id: v4(),
-    description: 'first todo',
-  },
-  {
-    id: v4(),
-    description: 'second todo',
-  },
-  {
-    id: v4(),
-    description: 'third todo',
-  },
-  {
-    id: v4(),
-    description: 'fourth todo',
-  },
-  {
-    id: v4(),
-    description: 'fifth todo',
-  },
-];
+// const Todo = [
+//   {
+//     id: v4(),
+//     description: 'first todo',
+//   },
+//   {
+//     id: v4(),
+//     description: 'second todo',
+//   },
+//   {
+//     id: v4(),
+//     description: 'third todo',
+//   },
+//   {
+//     id: v4(),
+//     description: 'fourth todo',
+//   },
+//   {
+//     id: v4(),
+//     description: 'fifth todo',
+//   },
+// ];
 
 const todoSlice = createSlice({
   name: 'todo',
   initialState: {
     todos: {
-      Todo,
-      'In-Progress': [
-        {
-          id: v4(),
-          description: 'second todo',
-        },
-      ],
+      Todo: [],
+      'In-Progress': [],
       Done: [],
     },
     selected: {},
   },
   reducers: {
+    getLocalStorageTodos: (state, { payload }) => {
+      state.todos = payload;
+    },
     // Add Reducer
     addTodo: (state, { payload }) => {
       state.todos.Todo.push({
@@ -86,5 +84,11 @@ const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
-export const { addTodo, deleteTodo, editTodo, selectTodo, dragDrop } =
-  todoSlice.actions;
+export const {
+  addTodo,
+  deleteTodo,
+  editTodo,
+  selectTodo,
+  dragDrop,
+  getLocalStorageTodos,
+} = todoSlice.actions;

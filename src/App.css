@@ -6,13 +6,11 @@ body {
 /* Layout */
 .ant-layout-content.bg-dark-grey {
   background-color: #151515;
-  min-height: calc(100vh - 116px);
-  border-top: 1px solid #cccc99;
-  border-bottom: 1px solid #cccc99;
+  min-height: calc(100vh - 110px);
 }
 .ant-layout-content.bg-dark-grey h2 {
   color: #fff;
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Open Sans', sans-serif;
 }
 .ant-layout-header,
 .ant-layout-footer {
@@ -23,14 +21,14 @@ body {
 .ant-layout-header,
 .ant-layout-footer {
   background: #030303 !important;
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Open Sans', sans-serif;
   color: #fff !important;
-  letter-spacing: 1.5px;
 }
 .ant-layout-header .ant-typography,
 .ant-layout-footer .ant-typography {
   color: #fff !important;
   margin-bottom: 0;
+  font-size: 18px;
 }
 .container {
   max-width: 100%;
@@ -42,44 +40,54 @@ body {
   position: relative;
 }
 .todo-list-row .add-icon {
-  background: #cccc99;
+  background: #e3cbd2;
   color: #333333;
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: absolute;
+  justify-content: center;
   width: 60px;
   height: 60px;
-  border-color: #cccc99;
-  border-radius: 50%;
+  position: absolute;
   top: -30px;
   right: -30px;
+  border: none;
+  border-radius: 50%;
 }
 .todo-list-row .add-icon:focus,
 .todo-list-row .add-icon:hover {
-  background: #c5c57b;
+  background: #efbebe;
   color: #fff;
-  border-color: #c5c57b;
+  border-color: #efbebe;
 }
 
 .darggable-list-item {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #efbebe;
   border-radius: 10px;
 }
 .darggable-list-item:hover,
 .darggable-list-item.is-dragging {
-  background: #c5c57b !important;
+  background: #efbebe !important;
   border-bottom: none;
+  color: #fff;
 }
-
+.darggable-list-item.is-dragging .ant-list-item * {
+  color: #fff;
+}
 .darggable-list-item:last-child {
   border: none;
 }
 
 .droppable-area {
   border-radius: 10px;
-  min-height: 25px;
-  background: #cccc99;
+  min-height: 30px;
+  background: #e3cbd2;
+}
+.droppable-area .empty-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.15rem 0.75rem;
+  min-height: 30px;
 }
 .droppable-area .ant-list-item {
   padding: 0.15rem 0.75rem;
@@ -108,21 +116,15 @@ body {
   background-color: rgba(0, 0, 0, 0.15) !important;
 }
 .ant-modal-header .ant-modal-title {
-  font-family: 'Indie Flower', cursive;
-  letter-spacing: 1.5px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .ant-modal-content,
 .ant-modal-header,
 .ant-modal-footer {
-  background-color: #cccc99 !important;
+  background-color: #d7c0c7 !important;
 }
-.ant-modal-footer {
-  border-top: 1px solid #fff !important;
-}
-.ant-modal-header {
-  border-bottom: 1px solid #fff !important;
-}
+
 .ant-input {
   border-radius: 10px !important;
 }
@@ -156,4 +158,49 @@ body {
 .ant-input-focused {
   border-color: #151515 !important;
   box-shadow: 0 0 0 2px rgb(0 0 0 / 20%) !important;
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .list-unstyled,
+.footer p {
+  margin-bottom: 0;
+}
+
+.footer .list-unstyled {
+  display: flex;
+  list-style-type: none;
+  justify-content: flex-end;
+  width: 50%;
+}
+.footer .list-unstyled li {
+  flex: 0 0 50px;
+  text-align: center;
+}
+.footer .list-unstyled a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid white;
+  transition: background-color 0.4s ease-in-out;
+}
+.footer .list-unstyled a:hover {
+  background-color: #fff;
+}
+.footer a span {
+  font-size: 20px;
+  color: #fff;
+  transition: color 0.4s ease-in-out;
+}
+.footer a:hover span {
+  color: #030303;
 }

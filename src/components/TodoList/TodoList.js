@@ -1,10 +1,15 @@
 import _ from 'lodash';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Row, Col, Typography, Button } from 'antd';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-import { deleteTodo, selectTodo, dragDrop } from '../../store/todoSlice';
+import {
+  deleteTodo,
+  selectTodo,
+  dragDrop,
+  getLocalStorageTodos,
+} from '../../store/todoSlice';
 import TodoItem from '../TodoItem/TodoItem';
 import EditForm from '../EditForm/EditForm';
 import { PlusOutlined } from '@ant-design/icons';
@@ -13,6 +18,17 @@ const { Title } = Typography;
 const TodoList = ({ showAddModal }) => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todo);
+
+  useEffect(() => {
+    // sync data from localStorage
+    const savedTodos = localStorage.getItem('todos');
+    console.log(JSON.parse(savedTodos));
+    dispatch(getLocalStorageTodos(JSON.parse(savedTodos)));
+  }, [dispatch]);
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleDeleteTodo = (payload) => {
@@ -64,41 +80,47 @@ const TodoList = ({ showAddModal }) => {
                   {...provided.droppableProps}
                 >
                   <List itemLayout="horizontal">
-                    {data.map((todo, idx) => (
-                      <Draggable
-                        key={todo.id}
-                        index={idx}
-                        draggableId={todo.id.toString()}
-                      >
-                        {(provided, snapshot) => {
-                          return (
-                            <div
-                              className={`darggable-list-item ${
-                                snapshot.isDragging && 'is-dragging'
-                              }`}
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <TodoItem
-                                todo={todo}
-                                idx={idx}
-                                handleDeleteTodo={handleDeleteTodo}
-                                handleSelectTodo={handleSelectTodo}
-                                showModalEdit={showModalEdit}
-                                location={key}
-                              />
-                              <EditForm
-                                isModalVisible={isModalVisible}
-                                handleCancel={handleCancel}
-                                // handleEditTodo={handleEditTodo}
-                                location={key}
-                              />
-                            </div>
-                          );
-                        }}
-                      </Draggable>
-                    ))}
+                    {data.length !== 0 ? (
+                      data.map((todo, idx) => {
+                        return (
+                          <Draggable
+                            key={todo.id}
+                            index={idx}
+                            draggableId={todo.id.toString()}
+                          >
+                            {(provided, snapshot) => {
+                              return (
+                                <div
+                                  className={`darggable-list-item ${
+                                    snapshot.isDragging && 'is-dragging'
+                                  }`}
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <TodoItem
+                                    todo={todo}
+                                    idx={idx}
+                                    handleDeleteTodo={handleDeleteTodo}
+                                    handleSelectTodo={handleSelectTodo}
+                                    showModalEdit={showModalEdit}
+                                    location={key}
+                                  />
+                                  <EditForm
+                                    isModalVisible={isModalVisible}
+                                    handleCancel={handleCancel}
+                                    // handleEditTodo={handleEditTodo}
+                                    location={key}
+                                  />
+                                </div>
+                              );
+                            }}
+                          </Draggable>
+                        );
+                      })
+                    ) : (
+                      <div className="empty-list">Add a task...</div>
+                    )}
                   </List>
                   {provided.placeholder}
                 </div>
