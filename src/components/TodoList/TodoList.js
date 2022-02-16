@@ -22,9 +22,11 @@ const TodoList = ({ showAddModal }) => {
   useEffect(() => {
     // sync data from localStorage
     const savedTodos = localStorage.getItem('todos');
-    console.log(JSON.parse(savedTodos));
-    dispatch(getLocalStorageTodos(JSON.parse(savedTodos)));
+    if (savedTodos) {
+      dispatch(getLocalStorageTodos(JSON.parse(savedTodos)));
+    }
   }, [dispatch]);
+
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
@@ -119,7 +121,7 @@ const TodoList = ({ showAddModal }) => {
                         );
                       })
                     ) : (
-                      <div className="empty-list">Add a task...</div>
+                      <div className="empty-list">No data to show...</div>
                     )}
                   </List>
                   {provided.placeholder}
