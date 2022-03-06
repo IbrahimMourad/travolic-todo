@@ -89,13 +89,13 @@ body {
   padding: 0.15rem 0.75rem;
   min-height: 30px;
 }
-.droppable-area .ant-list-item {
+.ant-list-item {
   padding: 0.15rem 0.75rem;
 }
-.droppable-area .ant-list-item,
-.droppable-area .ant-list-item-meta-description,
-.droppable-area .ant-list-item-meta-content {
-  color: rgba(0, 0, 0, 0.85);
+.todo-list-row .ant-list-item,
+.todo-list-row .ant-list-item-meta-description,
+.todo-list-row .ant-list-item-meta-content {
+  color: #fff;
 }
 
 .column {

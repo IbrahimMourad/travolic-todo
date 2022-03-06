@@ -5,16 +5,18 @@ import { editTodo } from '../../store/todoSlice';
 const EditForm = ({ isModalVisible, handleCancel }) => {
   const dispatch = useDispatch();
   const { selected } = useSelector((state) => state.todo);
-  const [todo, setTodo] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState();
 
   const handleEditTodo = () => {
-    dispatch(editTodo(todo));
+    dispatch(editTodo({ ...selected, title, description }));
     handleCancel();
   };
-
   useEffect(() => {
-    setTodo(selected);
-  }, [selected]);
+    // console.log(selected);
+    setDescription(selected.description);
+    setTitle(selected.title);
+  }, []);
 
   return (
     <Modal
@@ -37,10 +39,16 @@ const EditForm = ({ isModalVisible, handleCancel }) => {
       ]}
     >
       <Input
+        placeholder="Title"
+        size="large"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <Input
         placeholder="Edit Your Todo"
         size="large"
-        value={todo.description}
-        onChange={(e) => setTodo({ ...todo, description: e.target.value })}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
     </Modal>
   );

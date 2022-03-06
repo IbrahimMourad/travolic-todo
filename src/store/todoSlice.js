@@ -1,94 +1,67 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import { v4 } from 'uuid';
-// const Todo = [
-//   {
-//     id: v4(),
-//     description: 'first todo',
-//   },
-//   {
-//     id: v4(),
-//     description: 'second todo',
-//   },
-//   {
-//     id: v4(),
-//     description: 'third todo',
-//   },
-//   {
-//     id: v4(),
-//     description: 'fourth todo',
-//   },
-//   {
-//     id: v4(),
-//     description: 'fifth todo',
-//   },
-// ];
+const todos = [
+  {
+    id: v4(),
+    description: 'first todo',
+    title: 'first title',
+    date: {
+      timestamp: 1648677836685,
+      dateString: '31/03/2022',
+    },
+    priority: 1,
+    status: 2,
+  },
+  {
+    id: v4(),
+    description: 'second todo',
+    title: 'second title',
+    date: {
+      timestamp: 1616623506595,
+      dateString: '25/03/2021',
+    },
+    priority: 3,
+    status: 1,
+  },
+];
 
 const todoSlice = createSlice({
   name: 'todo',
   initialState: {
-    todos: {
-      Todo: [],
-      'In-Progress': [],
-      Done: [],
-    },
+    todos: todos,
     selected: {},
   },
   reducers: {
-    getLocalStorageTodos: (state, { payload }) => {
-      state.todos = payload;
-    },
     // Add Reducer
     addTodo: (state, { payload }) => {
-      state.todos.Todo.push({
-        description: payload,
+      state.todos.push({
+        description: payload.description,
+        title: payload.title,
+        date: payload.date,
+        priority: payload.priority,
+        status: payload.status,
+
         id: v4(),
       });
     },
 
     // Delete Reducer
-    deleteTodo: (state, { payload: { location, id } }) => {
-      state.todos[location] = state.todos[location].filter(
-        (todo) => todo.id !== id
-      );
+    deleteTodo: (state, { payload }) => {
+      state.todos = state.todos.filter((todo) => todo.id !== payload.id);
     },
 
     // Edit Reducer
-    selectTodo: (state, { payload: { location, id } }) => {
-      const itemIndex = state.todos[location].findIndex(
-        (item) => item.id === id
-      );
-
-      state.selected = { ...state.todos[location][itemIndex], location };
+    selectTodo: (state, { payload }) => {
+      state.selected = state.todos.find((el) => el.id === payload.id);
     },
     editTodo: (state, { payload }) => {
-      state.todos[state.selected.location] = state.todos[
-        state.selected.location
-      ].map((todo) =>
-        todo.id !== payload.id
-          ? todo
-          : { ...todo, description: payload.description }
+      state.todos = state.todos.map((el) =>
+        el.id === payload.id ? payload : el
       );
       state.selected = {};
-    },
-    dragDrop: (state, { payload: { destination, source, itemCopy } }) => {
-      //Remove from old location array
-      state.todos[source.droppableId].splice(source.index, 1);
-      //Remove from new location array
-      state.todos[destination.droppableId].splice(
-        destination.index,
-        0,
-        itemCopy
-      );
     },
   },
 });
 
 export default todoSlice.reducer;
-export const {
-  addTodo,
-  deleteTodo,
-  editTodo,
-  selectTodo,
-  dragDrop,
-  getLocalStorageTodos,
-} = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, selectTodo } = todoSlice.actions;

@@ -13,7 +13,7 @@ const ContentWrapper = () => {
   return (
     <>
       <Content className="bg-dark-grey">
-        <div className="container">
+        <div className="container todo-list-row">
           <TodoList showAddModal={showModal} />
         </div>
       </Content>
