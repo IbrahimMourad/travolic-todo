@@ -1,29 +1,6 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { v4 } from 'uuid';
-const todos = [
-  {
-    id: v4(),
-    description: 'first todo',
-    title: 'first title',
-    date: {
-      timestamp: 1648677836685,
-      dateString: '31/03/2022',
-    },
-    priority: 1,
-    status: 2,
-  },
-  {
-    id: v4(),
-    description: 'second todo',
-    title: 'second title',
-    date: {
-      timestamp: 1616623506595,
-      dateString: '25/03/2021',
-    },
-    priority: 3,
-    status: 1,
-  },
-];
+const todos = [];
 
 const todoSlice = createSlice({
   name: 'todo',
@@ -40,6 +17,7 @@ const todoSlice = createSlice({
         date: payload.date,
         priority: payload.priority,
         status: payload.status,
+        assignedUser: payload.assignedUser,
 
         id: v4(),
       });
@@ -60,8 +38,25 @@ const todoSlice = createSlice({
       );
       state.selected = {};
     },
+
+    filterTodo: (state, { payload: { filterType } }) => {
+      switch (filterType) {
+        case 'status':
+          state.todos = state.todos.sort((a, b) => a.status - b.status);
+          break;
+        case 'priority':
+          state.todos = state.todos.sort((a, b) => b.priority - a.priority);
+          break;
+        default:
+          state.todos = state.todos.sort(
+            (a, b) => a.date.timestamp - b.date.timestamp
+          );
+          break;
+      }
+    },
   },
 });
 
 export default todoSlice.reducer;
-export const { addTodo, deleteTodo, editTodo, selectTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, editTodo, selectTodo, filterTodo } =
+  todoSlice.actions;

@@ -1,15 +1,13 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { Card } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { List } from 'antd';
-const { Item } = List;
-const TodoItem = ({
-  todo,
-  handleDeleteTodo,
-  handleSelectTodo,
-  showModalEdit,
-  idx,
-}) => {
+import FormComponent from '../FormComponent/FormComponent';
+
+const TodoItem = ({ todo, handleDeleteTodo, handleSelectTodo }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const showModalEdit = () => setIsModalVisible(true);
+  const handleCancel = () => setIsModalVisible(false);
+
   const helperPriority = {
     1: 'Low',
     2: 'Medium',
@@ -18,12 +16,12 @@ const TodoItem = ({
   const helperStatus = { 1: 'To-do', 2: 'In Progress', 3: 'Done' };
 
   return (
-    <Item>
-      <Item.Meta avatar={idx + 1} description={todo.description} />
-      <div>-- {todo.title} -- </div>
-      <div>-- {helperPriority[todo.priority]} -- </div>
-      <div>-- {helperStatus[todo.status]} -- </div>
+    <Card title={todo.title}>
+      <div>{todo.description} </div>
+      <div>{helperPriority[todo.priority]} </div>
+      <div>{helperStatus[todo.status]} </div>
       <div className="date">{todo.date.dateString}</div>
+      <div className="user text-capitalize">{todo.assignedUser}</div>
       <div className="modal-actions">
         <DeleteOutlined
           className="action-icon"
@@ -41,7 +39,13 @@ const TodoItem = ({
           }}
         />
       </div>
-    </Item>
+      <FormComponent
+        id={todo.id}
+        isModalVisible={isModalVisible}
+        handleCancel={handleCancel}
+        type="edit"
+      />
+    </Card>
   );
 };
 

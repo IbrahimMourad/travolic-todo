@@ -1,74 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List, Typography, Button } from 'antd';
+import { List, Radio, Typography } from 'antd';
 
-import { deleteTodo, selectTodo } from '../../store/todoSlice';
+import { deleteTodo, selectTodo, filterTodo } from '../../store/todoSlice';
 import TodoItem from '../TodoItem/TodoItem';
-import EditForm from '../EditForm/EditForm';
-import { PlusOutlined } from '@ant-design/icons';
-
+const { Group, Button } = Radio;
 const { Title } = Typography;
-
-const TodoList = ({ showAddModal }) => {
+const TodoList = () => {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state.todo);
+  const [value, setValue] = useState('date');
 
+  const handleFilter = () => dispatch(filterTodo({ filterType: value }));
+
+  const handleDeleteTodo = (payload) => dispatch(deleteTodo(payload));
+  const handleSelectTodo = (payload) => dispatch(selectTodo(payload));
   useEffect(() => {
-    // sync data from localStorage
-    // const savedTodos = localStorage.getItem('todos');
-    // if (savedTodos) {
-    //   dispatch(getLocalStorageTodos(JSON.parse(savedTodos)));
-    // }
-    // console.log(todos);
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('todos', JSON.stringify(todos));
-  // }, [todos]);
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  let sortedData = [...todos].sort(
-    (a, b) => a.date.timestamp - b.date.timestamp
-  );
-
-  const handleDeleteTodo = (payload) => {
-    dispatch(deleteTodo(payload));
-  };
-  const handleSelectTodo = (payload) => {
-    dispatch(selectTodo(payload));
-  };
-
-  const showModalEdit = () => setIsModalVisible(true);
-  const handleCancel = () => setIsModalVisible(false);
-
+    handleFilter();
+  }, [value]);
   return (
     <>
-      <List itemLayout="horizontal">
-        {sortedData.length !== 0 ? (
-          sortedData.map((todo, idx) => (
-            <div key={todo.id}>
+      <Title level={5}>Sort by</Title>
+      <Group
+        className="filter-list"
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+        value={value}
+        buttonStyle="solid"
+      >
+        <Button value="date">Date</Button>
+        <Button value="priority">Priority</Button>
+        <Button value="status">Status</Button>
+      </Group>
+      {todos.length > 0 ? (
+        <List
+          grid={{ gutter: 16, column: 4 }}
+          dataSource={todos}
+          renderItem={(todo) => (
+            <List.Item>
               <TodoItem
+                key={todo.id}
                 todo={todo}
                 handleDeleteTodo={handleDeleteTodo}
                 handleSelectTodo={handleSelectTodo}
-                showModalEdit={showModalEdit}
-                idx={idx}
               />
-              <EditForm
-                id={todo.id}
-                isModalVisible={isModalVisible}
-                handleCancel={handleCancel}
-                // handleEditTodo={handleEditTodo}
-              />
-            </div>
-          ))
-        ) : (
-          <div className="empty-list">No data to show...</div>
-        )}
-      </List>
-      <Button className="add-icon" onClick={showAddModal}>
-        <PlusOutlined style={{ fontSize: '2rem' }} />
-      </Button>
+            </List.Item>
+          )}
+        />
+      ) : (
+        <div className="empty-list">No data to show...</div>
+      )}
     </>
   );
 };
