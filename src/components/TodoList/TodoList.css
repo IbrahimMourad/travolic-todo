@@ -1,0 +1,85 @@
+/* Helper classes */
+.low {
+  background: #28a745 !important;
+}
+.medium {
+  background: #f76e11 !important;
+}
+.high {
+  background: rgb(197 7 7) !important;
+}
+.badge {
+  padding: 2px 4px;
+  border-radius: 8px;
+  color: var(--color-white);
+}
+
+.empty-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.15rem 0.75rem;
+  min-height: 30px;
+  color: var(--color-secondary);
+}
+
+/* Todo - container */
+.todo-wrap {
+  display: grid;
+  gap: 5px;
+  padding-block: 2rem;
+  margin-inline: auto;
+}
+@media screen and (min-width: 550px) {
+  .todo-wrap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (min-width: 900px) {
+  .todo-wrap {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Todo card styles */
+.todo-wrap .card {
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%),
+    0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+  border-radius: 8px;
+  background: var(--color-white);
+  color: var(--color-black);
+  padding: 10px;
+}
+.todo-wrap .card:hover {
+  border-color: rgb(49, 70, 90) !important;
+  box-shadow: 0 0 0 2px rgba(75, 99, 122, 0.2) !important;
+}
+
+.todo-wrap .card .task-title,
+.todo-wrap .card .task-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .task-title .ant-typography {
+  color: var(--color-secondary);
+  margin-bottom: 0;
+}
+.todo-wrap .card .task-info {
+  margin-top: 1em;
+}
+.todo-wrap .card .task-title,
+.card .task-description,
+.task-status,
+.card .task-date,
+.card .task-user {
+  margin-bottom: 0.5em;
+}
+.card .task-date p {
+  margin: 0;
+}
+.card .task-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

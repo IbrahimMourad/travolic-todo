@@ -1,0 +1,66 @@
+/* Modal Styles */
+.action-icon {
+  padding: 0.5rem;
+}
+.action-icon:hover {
+  cursor: pointer;
+}
+
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.ant-modal-body .ant-input-lg {
+  margin: 0.5rem 0;
+}
+.ant-modal-body .ant-picker,
+.ant-modal-body .ant-select {
+  margin: 0.5rem;
+}
+
+.ant-picker,
+.ant-select:not(.ant-select-customize-input) .ant-select-selector,
+.ant-input,
+.ant-select-selector,
+.ant-select {
+  border-radius: 10px !important;
+}
+
+/* Input  */
+.ant-input:focus,
+.ant-input:hover,
+.ant-select:focus,
+.ant-select:hover,
+.ant-input-focused,
+.ant-picker:hover,
+.ant-picker:focus,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: rgb(49, 70, 90) !important;
+  box-shadow: 0 0 0 2px rgba(75, 99, 122, 0.2) !important;
+}
+
+.ant-modal .ant-btn {
+  border-radius: 8px;
+}
+
+.ant-modal .ant-btn:focus,
+.ant-modal .ant-btn:hover {
+  border-color: #b33030 !important;
+  box-shadow: 0 0 0 2px rgba(179, 48, 48, 0.35) !important;
+  background: #b33030;
+  color: #fff;
+}
+/* Add Or Edit Button */
+.ant-modal .ant-btn-primary {
+  color: #fff;
+  background: var(--color-secondary);
+  border-color: var(--color-secondary);
+  text-shadow: none;
+}
+
+.ant-modal .ant-btn-primary:hover,
+.ant-modal .ant-btn-primary:focus {
+  border-color: rgb(49, 70, 90) !important;
+  box-shadow: 0 0 0 2px rgba(75, 99, 122, 0.2) !important;
+  background: rgb(49, 70, 90);
+}

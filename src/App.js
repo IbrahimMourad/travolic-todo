@@ -15,11 +15,13 @@ const App = () => {
   const handleCancel = () => setIsModalVisible(false);
   return (
     <Layout>
-      <Header className="navbar">
-        <Title level={4}>Todo App</Title>
-        <Button className="add-icon" onClick={showModal}>
-          <PlusOutlined style={{ fontSize: '2rem' }} />
-        </Button>
+      <Header>
+        <div className="container navbar">
+          <Title level={4}>Todo App</Title>
+          <Button className="add-icon" onClick={showModal}>
+            <PlusOutlined style={{ fontSize: '2rem' }} />
+          </Button>
+        </div>
       </Header>
       <FormComponent
         isModalVisible={isModalVisible}

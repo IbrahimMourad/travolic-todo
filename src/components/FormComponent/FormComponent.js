@@ -9,7 +9,7 @@ import {
   Select,
   Form,
 } from 'antd';
-
+import './FormModal.css';
 import { editTodo, addTodo } from '../../store/todoSlice';
 
 const { Option } = Select;
@@ -17,7 +17,8 @@ const { Option } = Select;
 const FormComponent = ({ isModalVisible, handleCancel, type }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [dateObj, setDateObj] = useState({});
+  const [dateString, setDateString] = useState([]);
+  const [dateObj, setDateObj] = useState([]);
   const [priority, setPriority] = useState(1);
   const [status, setStatus] = useState(1);
   const [user, setUser] = useState('ahmed');
@@ -31,7 +32,16 @@ const FormComponent = ({ isModalVisible, handleCancel, type }) => {
         ...selected,
         title,
         description,
-        date: dateObj,
+        date: {
+          from: {
+            timestamp: dateObj[0]?._d.getTime() || 0,
+            dateString: dateString[0],
+          },
+          to: {
+            timestamp: dateObj[1]?._d.getTime() || 0,
+            dateString: dateString[1],
+          },
+        },
         priority,
         status,
         assignedUser: user,
@@ -55,7 +65,13 @@ const FormComponent = ({ isModalVisible, handleCancel, type }) => {
       addTodo({
         title,
         description,
-        date: dateObj,
+        date: {
+          from: {
+            timestamp: dateObj[0]._d.getTime(),
+            dateString: dateString[0],
+          },
+          to: { timestamp: dateObj[1]._d.getTime(), dateString: dateString[1] },
+        },
         priority,
         status,
         assignedUser: user,
@@ -63,13 +79,22 @@ const FormComponent = ({ isModalVisible, handleCancel, type }) => {
     );
     setTitle('');
     setDescription('');
-    setDateObj(new Date());
+    setDateObj([]);
     setUser('');
     handleCancel();
   };
-  const onChangeDate = (date, dateString) => {
-    setDateObj({ timestamp: date._d.getTime(), dateString });
-  };
+
+  useEffect(() => {
+    console.log({
+      date: {
+        from: {
+          timestamp: dateObj[0]?._d.getTime(),
+          dateString: dateString[0],
+        },
+        to: { timestamp: dateObj[1]?._d.getTime(), dateString: dateString[1] },
+      },
+    });
+  }, [dateObj, dateString]);
   return (
     <Modal
       title={
@@ -102,21 +127,28 @@ const FormComponent = ({ isModalVisible, handleCancel, type }) => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <Input
+        <Input.TextArea
+          rows={2}
           placeholder="Description"
           size="large"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <DatePicker
-          onChange={onChangeDate}
-          format={'DD/MM/YYYY'}
-          placeholder="Select date Ex: 20/01/2021"
-        />
 
+        <DatePicker.RangePicker
+          format={'DD/MM/YYYY'}
+          onChange={(val, dateString) => {
+            setDateObj(val);
+            setDateString(dateString);
+          }}
+          onCalendarChange={(val, dateString) => {
+            setDateObj(val);
+            setDateString(dateString);
+          }}
+        />
         <Select
           value={priority}
-          style={{ width: 120 }}
+          style={{ width: 150 }}
           onChange={(value) => setPriority(value)}
         >
           <Option value={1}>Low</Option>
@@ -124,12 +156,12 @@ const FormComponent = ({ isModalVisible, handleCancel, type }) => {
           <Option value={3}>High</Option>
         </Select>
         <Select
-          style={{ width: 120 }}
+          style={{ width: 150 }}
           onChange={(value) => setStatus(value)}
           value={status}
         >
           <Option value={1}>To-Do</Option>
-          <Option value={2}>In Progress</Option>
+          <Option value={2}>In-Progress</Option>
           <Option value={3}>Done</Option>
         </Select>
 
